@@ -79,14 +79,23 @@ public class BruteForce {
         for (char ch : ukralphabet) {
             alphabet.add(ch);
         }
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println(alphabet);
         System.out.println(alphabet.size());
 
         System.out.print("Введіть шлях до вихідного файлу: ");
 
-        Scanner scanner = new Scanner(System.in);
-        String inputFilePath = scanner.nextLine();
+        String inputFilePath;
+
+        do {
+            inputFilePath = scanner.nextLine();
+
+            File file = new File(inputFilePath);
+            if (!file.exists()) {
+                System.out.println("Шлях не є дійсним. Повторіть введення.");
+            }
+        } while (!new File(inputFilePath).exists());
 
         System.out.println("Попытка взлома шифра Цезаря...");
 
