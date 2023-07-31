@@ -106,24 +106,65 @@ public class Main {
         if (choice.equals("1")) {
 
             System.out.print("Введіть шлях до вихідного файлу: ");
-            String inputFilePath = scanner.nextLine();
+            String inputFilePath;
 
-            System.out.print("Введіть шлях для файлу з результатом: ");
+            do {
+                inputFilePath = scanner.nextLine();
+
+                File file = new File(inputFilePath);
+                if (!file.exists()) {
+                    System.out.println("Шлях не є дійсним. Повторіть введення.");
+                }
+            } while (!new File(inputFilePath).exists());
+
+            System.out.print("Введіть шлях до вихідного текстового файлу: ");
             String outputFilePath = scanner.nextLine();
 
-            System.out.print("Введіть число зміщення для шифрування: ");
-            int shift = scanner.nextInt();
-            scanner.nextLine();
+
+
+            int shift;
+            do {
+                System.out.print("Введіть ключ (ціле число, додатне або від'ємне):");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Помилка введення! Будь ласка, введіть ціле число.");
+                    scanner.next(); // Считываем некорректный ввод, чтобы очистить буфер
+                }
+                shift = scanner.nextInt();
+            } while (shift == 0);
 
             encryptFile(inputFilePath, outputFilePath, shift);
             System.out.println("Файл успішно зашифрований і збережений у " + outputFilePath);
-        } else {
+        }
+
+        else {
             System.out.print("Введіть шлях до вихідного текстового файлу: ");
-            String inputFilePath = scanner.nextLine();
+            String inputFilePath;
+
+            do {
+                inputFilePath = scanner.nextLine();
+
+                File file = new File(inputFilePath);
+                if (!file.exists()) {
+                    System.out.println("Шлях не є дійсним. Повторіть введення.");
+                }
+            } while (!new File(inputFilePath).exists());
+
+
             System.out.print("Введіть шлях для збереження дешифрованого файлу: ");
             String outputFilePath = scanner.nextLine();
+
             System.out.print("Введіть ключ для шифру Цезаря (ціле число): ");
-            int shift = scanner.nextInt();
+            int shift;
+            do {
+                System.out.print("Введіть ключ (ціле число, додатне або від'ємне):");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Помилка введення! Будь ласка, введіть ціле число.");
+                    scanner.next(); // Считываем некорректный ввод, чтобы очистить буфер
+                }
+                shift = scanner.nextInt();
+            } while (shift == 0);
+
+
             decryptFile(inputFilePath, outputFilePath, shift);
             System.out.println("Файл успішно разшифрований і збережений у " + outputFilePath);
 
