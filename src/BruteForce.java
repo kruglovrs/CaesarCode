@@ -16,7 +16,8 @@ public class BruteForce {
                 "ніщо", "чогось", "хтось", "щось", "кому", "кого", "чому", "що", "якісь", "інший",
                 "весь", "вся", "все", "всі", "ніби", "так", "там", "тут", "ось", "але",
                 "чи", "щоб", "про", "з", "перед", "після", "замість", "через", "для", "по",
-                "під", "вгорі", "внизу", "навколо", "поряд", "разом", "навпроти", "попереду", "позаду", "між"
+                "під", "вгорі", "внизу", "навколо", "поряд", "разом", "навпроти", "попереду", "позаду", "між", "серпень",
+                "концерт", "чемодан", "цвіркун", "сад"
         ));
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath))) {
@@ -33,15 +34,19 @@ public class BruteForce {
 
             for (int k = 1; k < alphabet.size(); k++) {
 
-                for (int i = 0; i < chars.length; i++) {
-                    char currentChar = chars[i];
-                    int index = alphabet.indexOf(currentChar);
+                for (int allText = chars.length; allText > 0; allText--) {
 
-                    if (index != -1) {
-                        int newIndex = (index - k + alphabet.size()) % alphabet.size();
-                        chars[i] = alphabet.get(newIndex);
+                    for (int i = 0; i < chars.length; i++) {
+                        char currentChar = chars[i];
+                        int index = alphabet.indexOf(currentChar);
+
+                        if (index != -1) {
+                            int newIndex = (index - k + alphabet.size()) % alphabet.size();
+                            chars[i] = alphabet.get(newIndex);
+                        }
                     }
-                    String done = new String(chars);
+
+                String done = new String(chars);
                     int matchedWords = 0;
                     String[] words = done.split("\\s+");
                     for (String word : words) {
@@ -50,7 +55,8 @@ public class BruteForce {
                         }
                     }
 
-                    if (matchedWords >= 1) {
+                    if (matchedWords >= 2) {
+                        System.out.println("");
                         System.out.println("Текст успешно расшифрован с ключом " + k);
                         System.out.println(done);
                         return;
@@ -98,6 +104,7 @@ public class BruteForce {
         } while (!new File(inputFilePath).exists());
 
         System.out.println("Попытка взлома шифра Цезаря...");
+        System.out.println("Исходный текст: ");
 
         loadText(inputFilePath, alphabet);
     }
