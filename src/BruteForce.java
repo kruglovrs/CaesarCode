@@ -57,7 +57,7 @@ public class BruteForce {
 
                     if (matchedWords >= 2) {
                         System.out.println("");
-                        System.out.println("Текст успешно расшифрован с ключом " + k);
+                        System.out.println("Текст успішно розшифровано з ключем " + k);
                         System.out.println(done);
                         return;
                     }
@@ -103,8 +103,8 @@ public class BruteForce {
             }
         } while (!new File(inputFilePath).exists());
 
-        System.out.println("Попытка взлома шифра Цезаря...");
-        System.out.println("Исходный текст: ");
+        System.out.println("Спроба зламу шифру Цезаря...");
+        System.out.println("Вихідний текст: ");
 
         loadText(inputFilePath, alphabet);
     }
